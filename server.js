@@ -30,6 +30,12 @@ app.use(express.static("public"))
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views/' )
 
+const logger = require("morgan");
+app.use(logger("dev"))
+
+const favicon = require("serve-favicon")
+// const path = require('path')
+app.use(favicon(__dirname + '/public/images/favicon.ico'))
 
 // Local Variables 
 // TODO           
