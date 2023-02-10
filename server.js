@@ -3,7 +3,17 @@ require('dotenv').config()
 
 
 // Connects to the database... if we had one :( 
-// TODO                                        
+const mongoose = require("mongoose")
+const MONGO_URI = "mongodb://localhost:27017/test-db" 
+mongoose.connect(MONGO_URI)
+.then(() => {
+  console.log("todo bien, conectado a la DB")
+})
+.catch((err) => {
+  console.log("todo mal", err)
+})
+
+const UserModel = require("./models/User.model.js")
 
 
 // Handles http requests (express is node js framework)
@@ -31,7 +41,18 @@ app.get('/', (req, res) => {
 })
 
 app.get('/about', (req, res) => {
-  res.render("about.hbs")
+
+  // acceder a la DB de usuarios y enviar la data a about.hbs
+  UserModel.find()
+  .then((response) => {
+    console.log("respuesta de la DB", response)
+
+    res.render("about.hbs", {
+      users: response
+    })
+
+  })
+
 })
 
 app.get('/my-hobbies', (req, res) => {

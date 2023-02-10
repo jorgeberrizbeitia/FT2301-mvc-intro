@@ -1,2 +1,10 @@
 <h2>About me!</h2>
 <p>Learn here about me</p>
+
+{{#each users}}
+  <div>
+    <h3>Nombre: {{this.name}}</h3>
+    <h3>email: {{this.email}}</h3>
+    <h3>age: {{this.age}}</h3>
+  </div>
+{{/each}}
